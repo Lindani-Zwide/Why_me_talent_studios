@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Why Me Talent Studios</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --soft-black: #1a1a1a;
+            --charcoal: #2d2d2d;
+            --ivory: #f8f8f6;
+            --muted-gold: #c9a961;
+            --warm-gray: #6b6b6b;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--ivory);
+            color: var(--soft-black);
+        }
+        
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .nav-blur {
+            backdrop-filter: blur(10px);
+            background: rgba(248, 248, 246, 0.9);
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--soft-black) 0%, var(--charcoal) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://kimi-web-img.moonshot.cn/img/images.squarespace-cdn.com/34ab5dde727412b84ad4580452a1fed6b9586f1d.jpg') center/cover;
+            opacity: 0.2;
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--muted-gold) 0%, #e6c068 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--muted-gold);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .reveal-up.revealed {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .stagger-delay-1 { transition-delay: 0.1s; }
+        .stagger-delay-2 { transition-delay: 0.2s; }
+        .stagger-delay-3 { transition-delay: 0.3s; }
+        .stagger-delay-4 { transition-delay: 0.4s; }
+        
+        .value-card {
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        
+        .value-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(26, 26, 26, 0.1);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-left: 3rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background: var(--muted-gold);
+            border-radius: 50%;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 1.5rem;
+            width: 2px;
+            height: calc(100% - 1rem);
+            background: #e5e5e5;
+        }
+        
+        .timeline-item:last-child::after {
+            display: none;
+        }
+        
+        .quote-mark {
+            font-size: 4rem;
+            line-height: 1;
+            color: var(--muted-gold);
+            opacity: 0.3;
+        }
+    </style>
+    <link rel="icon" type="image/png" href="/Assets/new_logo_one.png">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 nav-blur">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="font-display text-2xl font-semibold text-soft-black">
+                     <a href="index.html"> 
+                        <img src="/Assets/new_logo.png" alt="logo image" height="50" width="50">
+                    </a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="talent.html" class="nav-link text-sm font-medium text-soft-black hover:text-muted-gold">Talent</a>
+                    <a href="about.html" class="nav-link text-sm font-medium text-muted-gold">About</a>
+                    <a href="contact.html" class="nav-link text-sm font-medium text-soft-black hover:text-muted-gold">Contact</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-soft-black">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section pt-24 pb-20 text-white">
+        <div class="hero-content">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="max-w-4xl">
+                    <h1 class="font-display text-5xl lg:text-6xl font-bold mb-8 leading-tight">
+                        Redefining <span class="gradient-text">Talent</span> Representation
+                    </h1>
+                    <p class="text-xl lg:text-2xl text-gray-300 leading-relaxed">
+                        We believe that exceptional talent deserves exceptional representation. 
+                        Our agency was founded on the principle that every artist has a unique story worth telling.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Story -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal-up">
+                    <h2 class="font-display text-4xl lg:text-5xl font-bold mb-8 text-soft-black">
+                        Our <span class="gradient-text">Story</span>
+                    </h2>
+                    <div class="prose prose-lg text-warm-gray space-y-6">
+                        <p class="text-xl leading-relaxed">
+                            Founded in 2018 by industry veterans who recognized the need for a more personalized, 
+                            inclusive approach to talent representation, Why Me Talent Studios has quickly become 
+                            a trusted partner for brands and casting directors worldwide.
+                        </p>
+                        <p class="text-lg leading-relaxed">
+                            We started with a simple question: "Why should talent choose us?" The answer became 
+                            our mission—to provide representation that truly serves the artist, not just the industry. 
+                            We focus on building genuine relationships, understanding individual goals, and creating 
+                            opportunities that align with each talent's unique strengths and aspirations.
+                        </p>
+                        <p class="text-lg leading-relaxed">
+                            Today, we represent over 150 exceptional professionals across 15 distinct categories, 
+                            from traditional models and actors to digital creators and avant-garde performers. 
+                            Our roster reflects the diversity and creativity of the modern entertainment and fashion industries.
+                        </p>
+                    </div>
+                </div>
+                <div class="reveal-up stagger-delay-1">
+                    <div class="relative">
+                        <div class="aspect-[4/5] rounded-lg overflow-hidden shadow-2xl">
+                            <img src="https://kimi-web-img.moonshot.cn/img/justinharrisphotography.co.uk/8f599ccbeac658badff8b6354008ea14e084e705.png" 
+                                 alt="Agency Team" class="w-full h-full object-cover">
+                        </div>
+                        <div class="absolute -bottom-8 -right-8 w-32 h-32 bg-muted-gold rounded-full opacity-20"></div>
+                        <div class="absolute -top-8 -left-8 w-24 h-24 bg-soft-black rounded-full opacity-10"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Values -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal-up">
+                <h2 class="font-display text-4xl lg:text-5xl font-bold mb-6 text-soft-black">
+                    Our <span class="gradient-text">Mission</span>
+                </h2>
+                <p class="text-xl text-warm-gray max-w-3xl mx-auto">
+                    To empower exceptional talent by providing personalized representation that honors individuality, 
+                    fosters growth, and creates meaningful connections with opportunities worldwide.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="value-card bg-white p-8 rounded-lg shadow-lg reveal-up stagger-delay-1">
+                    <div class="w-12 h-12 bg-muted-gold rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-soft-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold mb-4">Authenticity</h3>
+                    <p class="text-warm-gray">
+                        We celebrate what makes each talent unique, never asking artists to conform to industry stereotypes. 
+                        Authentic representation leads to authentic performances.
+                    </p>
+                </div>
+                
+                <div class="value-card bg-white p-8 rounded-lg shadow-lg reveal-up stagger-delay-2">
+                    <div class="w-12 h-12 bg-muted-gold rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-soft-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold mb-4">Excellence</h3>
+                    <p class="text-warm-gray">
+                        From our curated talent roster to our professional service standards, 
+                        we maintain the highest level of quality in everything we do.
+                    </p>
+                </div>
+                
+                <div class="value-card bg-white p-8 rounded-lg shadow-lg reveal-up stagger-delay-3">
+                    <div class="w-12 h-12 bg-muted-gold rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-soft-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold mb-4">Inclusivity</h3>
+                    <p class="text-warm-gray">
+                        We actively seek and represent talent from all backgrounds, ages, sizes, and experiences, 
+                        believing that diversity strengthens the creative industries.
+                    </p>
+                </div>
+                
+                <div class="value-card bg-white p-8 rounded-lg shadow-lg reveal-up stagger-delay-4">
+                    <div class="w-12 h-12 bg-muted-gold rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-soft-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold mb-4">Professionalism</h3>
+                    <p class="text-warm-gray">
+                        We combine industry expertise with modern business practices, ensuring 
+                        reliable, efficient service for both talent and clients.
+                    </p>
+                </div>
+                
+                <div class="value-card bg-white p-8 rounded-lg shadow-lg reveal-up stagger-delay-1">
+                    <div class="w-12 h-12 bg-muted-gold rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-soft-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold mb-4">Relationships</h3>
+                    <p class="text-warm-gray">
+                        We build lasting partnerships based on trust, transparency, and mutual respect, 
+                        prioritizing long-term success over short-term gains.
+                    </p>
+                </div>
+                
+                <div class="value-card bg-white p-8 rounded-lg shadow-lg reveal-up stagger-delay-2">
+                    <div class="w-12 h-12 bg-muted-gold rounded-lg flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-soft-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-display text-2xl font-semibold mb-4">Growth</h3>
+                    <p class="text-warm-gray">
+                        We're committed to the continuous development of our talent, providing guidance, 
+                        training, and opportunities that advance careers.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal-up">
+                <h2 class="font-display text-4xl lg:text-5xl font-bold mb-6 text-soft-black">
+                    Our <span class="gradient-text">Journey</span>
+                </h2>
+                <p class="text-xl text-warm-gray">
+                    Key milestones in our growth and evolution
+                </p>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="space-y-12">
+                    <div class="timeline-item reveal-up">
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                                <h3 class="font-display text-2xl font-semibold text-soft-black">Foundation</h3>
+                                <span class="text-muted-gold font-semibold">2018</span>
+                            </div>
+                            <p class="text-warm-gray">
+                                Why Me Talent Studios was founded with a mission to provide more personalized, 
+                                inclusive talent representation. Started with 12 carefully selected artists 
+                                across fashion and commercial modeling.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item reveal-up stagger-delay-1">
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                                <h3 class="font-display text-2xl font-semibold text-soft-black">First Major Campaign</h3>
+                                <span class="text-muted-gold font-semibold">2019</span>
+                            </div>
+                            <p class="text-warm-gray">
+                                Secured our first major international campaign with a global fashion brand, 
+                                featuring three of our models in a groundbreaking diverse casting that set 
+                                new industry standards.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item reveal-up stagger-delay-2">
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                                <h3 class="font-display text-2xl font-semibold text-soft-black">Expansion</h3>
+                                <span class="text-muted-gold font-semibold">2020-2021</span>
+                            </div>
+                            <p class="text-warm-gray">
+                                Expanded into acting representation and added digital creators to our roster. 
+                                Introduced specialized categories for character faces, athletes, and avant-garde 
+                                artists to meet evolving industry demands.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item reveal-up stagger-delay-3">
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                                <h3 class="font-display text-2xl font-semibold text-soft-black">Industry Recognition</h3>
+                                <span class="text-muted-gold font-semibold">2022</span>
+                            </div>
+                            <p class="text-warm-gray">
+                                Named "Agency of the Year" by Fashion Industry Magazine for our innovative 
+                                approach to talent representation and commitment to diversity and inclusion 
+                                in the fashion and entertainment industries.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item reveal-up stagger-delay-4">
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                                <h3 class="font-display text-2xl font-semibold text-soft-black">Global Reach</h3>
+                                <span class="text-muted-gold font-semibold">2023-2024</span>
+                            </div>
+                            <p class="text-warm-gray">
+                                Established partnerships with international agencies and expanded our reach 
+                                to serve clients globally. Launched our digital platform to streamline 
+                                talent discovery and booking processes.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item reveal-up">
+                        <div class="bg-gray-50 p-6 rounded-lg">
+                            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                                <h3 class="font-display text-2xl font-semibold text-soft-black">Today</h3>
+                                <span class="text-muted-gold font-semibold">2025</span>
+                            </div>
+                            <p class="text-warm-gray">
+                                Continuing to lead with innovation, representing over 150 exceptional professionals 
+                                and partnering with major brands, production companies, and casting directors 
+                                worldwide. Our commitment to authentic representation remains stronger than ever.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 reveal-up">
+                <h2 class="font-display text-4xl lg:text-5xl font-bold mb-6 text-soft-black">
+                    What People <span class="gradient-text">Say</span>
+                </h2>
+                <p class="text-xl text-warm-gray">
+                    Testimonials from clients and talent
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-lg shadow-lg reveal-up stagger-delay-1">
+                    <div class="quote-mark">"</div>
+                    <p class="text-warm-gray mb-6 italic">
+                        Why Me Talent Studios consistently delivers exceptional talent that perfectly matches 
+                        our creative vision. Their understanding of both artistry and commercial needs is unmatched.
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-muted-gold rounded-full flex items-center justify-center mr-4">
+                            <span class="text-soft-black font-semibold">SC</span>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-soft-black">Sarah Chen</div>
+                            <div class="text-sm text-warm-gray">Creative Director, Global Fashion Brand</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-8 rounded-lg shadow-lg reveal-up stagger-delay-2">
+                    <div class="quote-mark">"</div>
+                    <p class="text-warm-gray mb-6 italic">
+                        As a character actor, I struggled to find representation that understood my niche. 
+                        Why Me not only gets it but has helped me book roles I never thought possible.
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-muted-gold rounded-full flex items-center justify-center mr-4">
+                            <span class="text-soft-black font-semibold">RM</span>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-soft-black">Robert Mitchell</div>
+                            <div class="text-sm text-warm-gray">Character Actor</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-8 rounded-lg shadow-lg reveal-up stagger-delay-3">
+                    <div class="quote-mark">"</div>
+                    <p class="text-warm-gray mb-6 italic">
+                        The team at Why Me truly cares about their talent's success. They've been instrumental 
+                        in building my career and always have my best interests at heart.
+                    </p>
+                    <div class="flex items-center">
+                        <div class="w-12 h-12 bg-muted-gold rounded-full flex items-center justify-center mr-4">
+                            <span class="text-soft-black font-semibold">MR</span>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-soft-black">Maya Rodriguez</div>
+                            <div class="text-sm text-warm-gray">Commercial Model</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="py-20 bg-soft-black text-white">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <div class="reveal-up">
+                <h2 class="font-display text-4xl lg:text-5xl font-bold mb-8">
+                    Ready to Work <span class="gradient-text">Together?</span>
+                </h2>
+                <p class="text-xl text-gray-300 mb-12 max-w-3xl mx-auto">
+                    Whether you're exceptional talent seeking representation or a client looking for the perfect artist, 
+                    we'd love to discuss how we can help you achieve your goals.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="contact.html" class="bg-muted-gold text-soft-black px-8 py-4 text-lg font-semibold hover:bg-opacity-90 transition-colors">
+                        Get In Touch
+                    </a>
+                    <a href="talent.html" class="border-2 border-muted-gold text-muted-gold px-8 py-4 text-lg font-semibold hover:bg-muted-gold hover:text-soft-black transition-colors">
+                        View Our Talent
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-soft-black text-white py-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center">
+                <div class="font-display text-3xl font-semibold mb-4">
+                    Why Me <span class="gradient-text">Talent</span>
+                </div>
+                <p class="text-gray-400 mb-8">Premium talent representation for the modern creative industry</p>
+                <div class="flex justify-center space-x-8 mb-8">
+                    <a href="#" class="text-gray-400 hover:text-muted-gold transition-colors">Instagram</a>
+                    <a href="#" class="text-gray-400 hover:text-muted-gold transition-colors">LinkedIn</a>
+                    <a href="#" class="text-gray-400 hover:text-muted-gold transition-colors">Twitter</a>
+                </div>
+                <div class="text-sm text-gray-500">
+                    © 2026 Why Me Talent Studios. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // About page specific functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            initScrollReveal();
+            initMobileMenu();
+        });
+
+        // Scroll reveal animations
+        function initScrollReveal() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe all reveal elements
+            document.querySelectorAll('.reveal-up').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // Mobile menu functionality
+        function initMobileMenu() {
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const nav = document.querySelector('nav');
+            
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    let mobileMenu = document.getElementById('mobile-menu');
+                    if (!mobileMenu) {
+                        mobileMenu = createMobileMenu();
+                        nav.appendChild(mobileMenu);
+                    }
+                    
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+        }
+
+        function createMobileMenu() {
+            const mobileMenu = document.createElement('div');
+            mobileMenu.id = 'mobile-menu';
+            mobileMenu.className = 'hidden md:hidden absolute top-full left-0 right-0 bg-white shadow-lg py-4';
+            mobileMenu.innerHTML = `
+                <div class="px-6 py-4 space-y-4">
+                    <a href="index.html" class="block text-soft-black hover:text-muted-gold transition-colors">Home</a>
+                    <a href="talent.html" class="block text-soft-black hover:text-muted-gold transition-colors">Talent</a>
+                    <a href="about.html" class="block text-muted-gold font-medium">About</a>
+                    <a href="contact.html" class="block text-soft-black hover:text-muted-gold transition-colors">Contact</a>
+                </div>
+            `;
+            return mobileMenu;
+        }
+    </script>
+</body>
+</html>

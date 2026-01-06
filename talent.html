@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Talent Portfolio - Why Me Talent Studios</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --soft-black: #1a1a1a;
+            --charcoal: #2d2d2d;
+            --ivory: #f8f8f6;
+            --muted-gold: #c9a961;
+            --warm-gray: #6b6b6b;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--ivory);
+            color: var(--soft-black);
+        }
+        
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .nav-blur {
+            backdrop-filter: blur(10px);
+            background: rgba(248, 248, 246, 0.9);
+        }
+        
+        .filter-btn {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .filter-btn.active {
+            background: var(--muted-gold);
+            color: var(--soft-black);
+            border-color: var(--muted-gold);
+        }
+        
+        .filter-btn:hover {
+            border-color: var(--muted-gold);
+            color: var(--muted-gold);
+        }
+        
+        .talent-card {
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+        }
+        
+        .talent-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(26, 26, 26, 0.15);
+        }
+        
+        .talent-card img {
+            transition: transform 0.4s ease;
+        }
+        
+        .talent-card:hover img {
+            transform: scale(1.05);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(26, 26, 26, 0.9);
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+        
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: white;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: 8px;
+            position: relative;
+        }
+        
+        .search-input {
+            background: white;
+            border: 2px solid #e5e5e5;
+            transition: border-color 0.3s ease;
+        }
+        
+        .search-input:focus {
+            border-color: var(--muted-gold);
+            outline: none;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--muted-gold) 0%, #e6c068 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--muted-gold);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .category-section {
+            margin-bottom: 4rem;
+        }
+        
+        .talent-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .talent-grid {
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+                gap: 1rem;
+            }
+        }
+    </style>
+    <link rel="icon" type="image/png" href="/Assets/new_logo_one.png">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 nav-blur">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="font-display text-2xl font-semibold text-soft-black">
+                    <a href="index.html"> 
+                        <img src="/Assets/new_logo.png" alt="logo image" height="50" width="50">
+                    </a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="talent.html" class="nav-link text-sm font-medium text-muted-gold">Talent</a>
+                    <a href="about.html" class="nav-link text-sm font-medium text-soft-black hover:text-muted-gold">About</a>
+                    <a href="contact.html" class="nav-link text-sm font-medium text-soft-black hover:text-muted-gold">Contact</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-soft-black">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Section -->
+    <section class="pt-24 pb-12 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <h1 class="font-display text-5xl lg:text-6xl font-bold mb-6 text-soft-black">
+                    Talent <span class="gradient-text">Portfolio</span>
+                </h1>
+                <p class="text-xl text-warm-gray max-w-3xl mx-auto">
+                    Discover exceptional professionals across our curated talent categories. 
+                    Each artist brings unique skills and authentic presence to every project.
+                </p>
+            </div>
+            
+            <!-- Search and Filter -->
+            <div class="max-w-4xl mx-auto">
+                <div class="flex flex-col md:flex-row gap-4 mb-8">
+                    <div class="flex-1">
+                        <input type="text" id="talent-search" placeholder="Search talent by name, category, or skill..." 
+                               class="search-input w-full px-6 py-3 text-lg">
+                    </div>
+                    <select id="experience-filter" class="search-input px-6 py-3 text-lg">
+                        <option value="">All Experience Levels</option>
+                        <option value="beginner">Beginner (0-2 years)</option>
+                        <option value="intermediate">Intermediate (3-5 years)</option>
+                        <option value="experienced">Experienced (5-10 years)</option>
+                        <option value="expert">Expert (10+ years)</option>
+                    </select>
+                </div>
+                
+                <!-- Category Filters -->
+                <div class="flex flex-wrap gap-3 justify-center">
+                    <button class="filter-btn active px-6 py-2 text-sm font-medium rounded-full" data-category="all">
+                        All Categories
+                    </button>
+                    <button class="filter-btn px-6 py-2 text-sm font-medium rounded-full" data-category="models">
+                        Supporting actor                                                                   
+                    </button>
+                    <button class="filter-btn px-6 py-2 text-sm font-medium rounded-full" data-category="models">
+                        Models                                                                   
+                    </button>
+                    <button class="filter-btn px-6 py-2 text-sm font-medium rounded-full" data-category="actors">
+                        Actors
+                    </button>
+                    <button class="filter-btn px-6 py-2 text-sm font-medium rounded-full" data-category="character-faces">
+                        Commercial talent
+                    </button>
+                    <button class="filter-btn px-6 py-2 text-sm font-medium rounded-full" data-category="athletes">
+                        Niche
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Talent Grid -->
+    <section class="py-12 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <!-- Core Categories -->
+            <div class="category-section" data-category="models">
+                <h2 class="font-display text-3xl font-bold mb-8 text-soft-black">Models</h2>
+                <div class="talent-grid">
+                    <div class="talent-card bg-white rounded-lg overflow-hidden shadow-lg" data-talent="alex-chen">
+                        <div class="aspect-[3/4] overflow-hidden">
+                            <img src="https://kimi-web-img.moonshot.cn/img/www.heatherandjameson.com/c3fc34c4e3910548ad3725eb9eeb8240521f5c1e.jpg" 
+                                 alt="Alex Chen" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-display text-xl font-semibold mb-2">Alex Chen</h3>
+                            <p class="text-warm-gray mb-2">High Fashion Model</p>
+                            <p class="text-sm text-warm-gray">8 years experience • 5'11" • Based in NYC</p>
+                        </div>
+                    </div>
+                    
+                    <div class="talent-card bg-white rounded-lg overflow-hidden shadow-lg" data-talent="maya-rodriguez">
+                        <div class="aspect-[3/4] overflow-hidden">
+                            <img src="https://kimi-web-img.moonshot.cn/img/brandpacks.com/66a6c3a0842cfa77b2cad5b2091894a91cee6a3c.jpg" 
+                                 alt="Maya Rodriguez" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-display text-xl font-semibold mb-2">Maya Rodriguez</h3>
+                            <p class="text-warm-gray mb-2">Commercial Model</p>
+                            <p class="text-sm text-warm-gray">6 years experience • 5'9" • Based in LA</p>
+                        </div>
+                    </div>
+                    
+                    <div class="talent-card bg-white rounded-lg overflow-hidden shadow-lg" data-talent="jordan-kim">
+                        <div class="aspect-[3/4] overflow-hidden">
+                            <img src="https://kimi-web-img.moonshot.cn/img/px-web-images9.pixpa.com/22c1f00d219f21b66674394b530cb6f7af6f9004" 
+                                 alt="Jordan Kim" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-display text-xl font-semibold mb-2">Jordan Kim</h3>
+                            <p class="text-warm-gray mb-2">Fitness Model</p>
+                            <p class="text-sm text-warm-gray">4 years experience • 6'1" • Based in Miami</p>
+                        </div>
+                    </div>
+                    
+                    <div class="talent-card bg-white rounded-lg overflow-hidden shadow-lg" data-talent="sam-taylor">
+                        <div class="aspect-[3/4] overflow-hidden">
+                            <img src="https://kimi-web-img.moonshot.cn/img/images.squarespace-cdn.com/e52f70ded47691294b50fef9f1c131e97751bbf9.jpg" 
+                                 alt="Sam Taylor" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-display text-xl font-semibold mb-2">Sam Taylor</h3>
+                            <p class="text-warm-gray mb-2">Plus Size Model</p>
+                            <p class="text-sm text-warm-gray">3 years experience • 5'10" • Based in Chicago</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actors -->
+            <div class="category-section" data-category="actors">
+                <h2 class="font-display text-3xl font-bold mb-8 text-soft-black">Actors</h2>
+                <div class="talent-grid">
+                    <div class="talent-card bg-white rounded-lg overflow-hidden shadow-lg" data-talent="david-park">
+                        <div class="aspect-[3/4] overflow-hidden">
+                            <img src="https://kimi-web-img.moonshot.cn/img/mir-s3-cdn-cf.behance.net/1e778a86356931f2e36322ae5c91da659185189f.jpg" 
+                                 alt="David Park" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-display text-xl font-semibold mb-2">David Park</h3>
+                            <p class="text-warm-gray mb-2">Supporting Actor</p>
+                            <p class="text-sm text-warm-gray">12 years experience • Film & TV • Based in LA</p>
+                        </div>
+                    </div>
+                    
+                    <div class="talent-card bg-white rounded-lg overflow-hidden shadow-lg" data-talent="elena-vazquez">
+                        <div class="aspect-[3/4] overflow-hidden">
+                            <img src="https://kimi-web-img.moonshot.cn/img/images.squarespace-cdn.com/5b168f7777b283358528623de1395af03a890d85.jpg" 
+                                 alt="Elena Vazquez" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-display text-xl font-semibold mb-2">Elena Vazquez</h3>
+                            <p class="text-warm-gray mb-2">Commercial Actor</p>
+                            <p class="text-sm text-warm-gray">7 years experience • Commercials • Based in NYC</p>
+                        </div>
+                    </div>
+                    
+                    <div class="talent-card bg-white rounded-lg overflow-hidden shadow-lg" data-talent="marcus-johnson">
+                        <div class="aspect-[3/4] overflow-hidden">
+                            <img src="https://kimi-web-img.moonshot.cn/img/static1.squarespace.com/2e463be9c5eccc8cff966ba2e740b3800e2ed715.jpg" 
+                                 alt="Marcus Johnson" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-display text-xl font-semibold mb-2">Marcus Johnson</h3>
+                            <p class="text-warm-gray mb-2">Voice Actor</p>
+                            <p class="text-sm text-warm-gray">9 years experience • Animation & Games • Based in Austin</p>
+                        </div>
+                    </div>
+                    
+                    <div class="talent-card bg-white rounded-lg overflow-hidden shadow-lg" data-talent="sophia-williams">
+                        <div class="aspect-[3/4] overflow-hidden">
+                            <img src="https://kimi-web-img.moonshot.cn/img/mir-s3-cdn-cf.behance.net/bb4f053054b45d1d91b96377387d6ef7c4d74600.jpg" 
+                                 alt="Sophia Williams" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-display text-xl font-semibold mb-2">Sophia Williams</h3>
+                            <p class="text-warm-gray mb-2">Theater Actor</p>
+                            <p class="text-sm text-warm-gray">15 years experience • Broadway & Regional • Based in NYC</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Character Faces -->
+            <div class="category-section" data-category="character-faces">
+                <h2 class="font-display text-3xl font-bold mb-8 text-soft-black">Character Faces</h2>
+                <div class="talent-grid">
+                    <div class="talent-card bg-white rounded-lg overflow-hidden shadow-lg" data-talent="robert-mitchell">
+                        <div class="aspect-[3/4] overflow-hidden">
+                            <img src="resources/talent-1.jpg" 
+                                 alt="Robert Mitchell" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-display text-xl font-semibold mb-2">Robert Mitchell</h3>
+                            <p class="text-warm-gray mb-2">Character Actor</p>
+                            <p class="text-sm text-warm-gray">20 years experience • Unique Looks • Based in London</p>
+                        </div>
+                    </div>
+                    
+                    <div class="talent-card bg-white rounded-lg overflow-hidden shadow-lg" data-talent="maria-gonzalez">
+                        <div class="aspect-[3/4] overflow-hidden">
+                            <img src="https://kimi-web-img.moonshot.cn/img/www.sleek-mag.com/7478aa3351ea308fd7d33d1a013c9a16c92ef36e.jpg" 
+                                 alt="Maria Gonzalez" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-display text-xl font-semibold mb-2">Maria Gonzalez</h3>
+                            <p class="text-warm-gray mb-2">Distinctive Features</p>
+                            <p class="text-sm text-warm-gray">5 years experience • Authentic Casting • Based in LA</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Athletes -->
+            <div class="category-section" data-category="athletes">
+                <h2 class="font-display text-3xl font-bold mb-8 text-soft-black">Athletes & Sports Talent</h2>
+                <div class="talent-grid">
+                    <div class="talent-card bg-white rounded-lg overflow-hidden shadow-lg" data-talent="chris-thompson">
+                        <div class="aspect-[3/4] overflow-hidden">
+                            <img src="resources/talent-2.jpg" 
+                                 alt="Chris Thompson" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-display text-xl font-semibold mb-2">Chris Thompson</h3>
+                            <p class="text-warm-gray mb-2">Fitness Model</p>
+                            <p class="text-sm text-warm-gray">6 years experience • Former Pro Athlete • Based in Miami</p>
+                        </div>
+                    </div>
+                    
+                    <div class="talent-card bg-white rounded-lg overflow-hidden shadow-lg" data-talent="lisa-zhang">
+                        <div class="aspect-[3/4] overflow-hidden">
+                            <img src="https://kimi-web-img.moonshot.cn/img/img.freepik.com/00766733b39baa22d079e23461678736512e7c1e.jpg" 
+                                 alt="Lisa Zhang" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-display text-xl font-semibold mb-2">Lisa Zhang</h3>
+                            <p class="text-warm-gray mb-2">Yoga Instructor</p>
+                            <p class="text-sm text-warm-gray">8 years experience • Wellness Expert • Based in San Diego</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Digital Creators -->
+            <div class="category-section" data-category="digital-creators">
+                <h2 class="font-display text-3xl font-bold mb-8 text-soft-black">Digital Creators</h2>
+                <div class="talent-grid">
+                    <div class="talent-card bg-white rounded-lg overflow-hidden shadow-lg" data-talent="riley-park">
+                        <div class="aspect-[3/4] overflow-hidden">
+                            <img src="https://kimi-web-img.moonshot.cn/img/www.robbieewing.com/79714f760b6f66af6498590988ba7f132272753e.jpg" 
+                                 alt="Riley Park" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-display text-xl font-semibold mb-2">Riley Park</h3>
+                            <p class="text-warm-gray mb-2">Lifestyle Influencer</p>
+                            <p class="text-sm text-warm-gray">2M followers • Brand Partnerships • Based in NYC</p>
+                        </div>
+                    </div>
+                    
+                    <div class="talent-card bg-white rounded-lg overflow-hidden shadow-lg" data-talent="alex-martinez">
+                        <div class="aspect-[3/4] overflow-hidden">
+                            <img src="https://kimi-web-img.moonshot.cn/img/www.tattoolife.com/86bbf579ba53f59af4210df3bff086372de293ac.jpg" 
+                                 alt="Alex Martinez" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-display text-xl font-semibold mb-2">Alex Martinez</h3>
+                            <p class="text-warm-gray mb-2">Content Creator</p>
+                            <p class="text-sm text-warm-gray">500K followers • Fashion & Lifestyle • Based in LA</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Avant-Garde -->
+            <div class="category-section" data-category="avant-garde">
+                <h2 class="font-display text-3xl font-bold mb-8 text-soft-black">Avant-Garde & Experimental</h2>
+                <div class="talent-grid">
+                    <div class="talent-card bg-white rounded-lg overflow-hidden shadow-lg" data-talent="dakota-rivers">
+                        <div class="aspect-[3/4] overflow-hidden">
+                            <img src="resources/talent-3.jpg" 
+                                 alt="Dakota Rivers" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-display text-xl font-semibold mb-2">Dakota Rivers</h3>
+                            <p class="text-warm-gray mb-2">Performance Artist</p>
+                            <p class="text-sm text-warm-gray">10 years experience • Experimental • Based in Berlin</p>
+                        </div>
+                    </div>
+                    
+                    <div class="talent-card bg-white rounded-lg overflow-hidden shadow-lg" data-talent="kai-sato">
+                        <div class="aspect-[3/4] overflow-hidden">
+                            <img src="https://kimi-web-img.moonshot.cn/img/images.pexels.com/a9c0e3729e03b81b3fb726a10d86efcd757b212f.jpeg" 
+                                 alt="Kai Sato" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <h3 class="font-display text-xl font-semibold mb-2">Kai Sato</h3>
+                            <p class="text-warm-gray mb-2">Conceptual Artist</p>
+                            <p class="text-sm text-warm-gray">7 years experience • Installation Art • Based in Tokyo</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Talent Modal -->
+    <div id="talent-modal" class="modal">
+        <div class="modal-content m-4">
+            <button id="close-modal" class="absolute top-4 right-4 text-gray-500 hover:text-gray-700 z-10">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                </svg>
+            </button>
+            <div id="modal-content">
+                <!-- Dynamic content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-soft-black text-white py-12">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center">
+                <div class="font-display text-3xl font-semibold mb-4">
+                    Why Me <span class="gradient-text">Talent</span>
+                </div>
+                <p class="text-gray-400 mb-8">Premium talent representation for the modern creative industry</p>
+                <div class="flex justify-center space-x-8 mb-8">
+                    <a href="#" class="text-gray-400 hover:text-muted-gold transition-colors">Instagram</a>
+                    <a href="#" class="text-gray-400 hover:text-muted-gold transition-colors">LinkedIn</a>
+                    <a href="#" class="text-gray-400 hover:text-muted-gold transition-colors">Twitter</a>
+                </div>
+                <div class="text-sm text-gray-500">
+                    © 2026 Why Me Talent Studios. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Talent page specific functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            initTalentFilters();
+            initTalentSearch();
+            initTalentModals();
+            initMobileMenu();
+        });
+
+        // Filter functionality
+        function initTalentFilters() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            const categorySections = document.querySelectorAll('.category-section');
+            
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Update active button
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    
+                    const category = btn.dataset.category;
+                    
+                    // Show/hide categories
+                    categorySections.forEach(section => {
+                        if (category === 'all' || section.dataset.category === category) {
+                            section.style.display = 'block';
+                            anime({
+                                targets: section,
+                                opacity: [0, 1],
+                                translateY: [30, 0],
+                                duration: 600,
+                                easing: 'easeOutQuart'
+                            });
+                        } else {
+                            section.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        }
+
+        // Search functionality
+        function initTalentSearch() {
+            const searchInput = document.getElementById('talent-search');
+            const talentCards = document.querySelectorAll('.talent-card');
+            
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                
+                talentCards.forEach(card => {
+                    const name = card.querySelector('h3').textContent.toLowerCase();
+                    const category = card.querySelector('p').textContent.toLowerCase();
+                    const details = card.querySelector('.text-sm').textContent.toLowerCase();
+                    
+                    const matches = name.includes(searchTerm) || 
+                                  category.includes(searchTerm) || 
+                                  details.includes(searchTerm);
+                    
+                    if (matches || searchTerm === '') {
+                        card.style.display = 'block';
+                        card.parentElement.style.display = 'grid';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        }
+
+        // Modal functionality
+        function initTalentModals() {
+            const talentCards = document.querySelectorAll('.talent-card');
+            const modal = document.getElementById('talent-modal');
+            const closeBtn = document.getElementById('close-modal');
+            const modalContent = document.getElementById('modal-content');
+            
+            // Sample talent data (in real app, this would come from API)
+            const talentData = {
+                'alex-chen': {
+                    name: 'Alex Chen',
+                    category: 'High Fashion Model',
+                    experience: '8 years',
+                    location: 'New York City',
+                    height: '5\'11"',
+                    measurements: '32-24-34',
+                    about: 'Alex is an experienced high fashion model with extensive runway and editorial experience. Known for versatility and professional demeanor.',
+                    portfolio: [
+                        'https://kimi-web-img.moonshot.cn/img/www.heatherandjameson.com/c3fc34c4e3910548ad3725eb9eeb8240521f5c1e.jpg',
+                        'https://kimi-web-img.moonshot.cn/img/brandpacks.com/66a6c3a0842cfa77b2cad5b2091894a91cee6a3c.jpg',
+                        'https://kimi-web-img.moonshot.cn/img/www.heatherandjameson.com/d6437b48c9e6129087f95416e8637dac61599b3b.jpg'
+                    ]
+                }
+                // Add more talent data as needed
+            };
+            
+            talentCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const talentId = card.dataset.talent;
+                    const talent = talentData[talentId];
+                    
+                    if (talent) {
+                        modalContent.innerHTML = `
+                            <div class="grid md:grid-cols-2 gap-8 p-8">
+                                <div>
+                                    <img src="${talent.portfolio[0]}" alt="${talent.name}" class="w-full h-full object-cover rounded-lg">
+                                </div>
+                                <div>
+                                    <h2 class="font-display text-3xl font-bold mb-4">${talent.name}</h2>
+                                    <p class="text-xl text-muted-gold mb-6">${talent.category}</p>
+                                    <div class="space-y-3 mb-6">
+                                        <p><strong>Experience:</strong> ${talent.experience}</p>
+                                        <p><strong>Location:</strong> ${talent.location}</p>
+                                        <p><strong>Height:</strong> ${talent.height}</p>
+                                        <p><strong>Measurements:</strong> ${talent.measurements}</p>
+                                    </div>
+                                    <p class="text-warm-gray mb-8">${talent.about}</p>
+                                    <button class="bg-muted-gold text-soft-black px-8 py-3 font-semibold hover:bg-opacity-90 transition-colors">
+                                        Book This Talent
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                    } else {
+                        modalContent.innerHTML = `
+                            <div class="p-8 text-center">
+                                <h2 class="font-display text-2xl font-bold mb-4">Talent Profile</h2>
+                                <p class="text-warm-gray mb-6">Detailed profile information coming soon.</p>
+                                <button class="bg-muted-gold text-soft-black px-8 py-3 font-semibold hover:bg-opacity-90 transition-colors">
+                                    Contact for Booking
+                                </button>
+                            </div>
+                        `;
+                    }
+                    
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            closeBtn.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) closeModal();
+            });
+            
+            function closeModal() {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // Mobile menu functionality
+        function initMobileMenu() {
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const nav = document.querySelector('nav');
+            
+            if (mobileMenuBtn) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    let mobileMenu = document.getElementById('mobile-menu');
+                    if (!mobileMenu) {
+                        mobileMenu = createMobileMenu();
+                        nav.appendChild(mobileMenu);
+                    }
+                    
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+        }
+
+        function createMobileMenu() {
+            const mobileMenu = document.createElement('div');
+            mobileMenu.id = 'mobile-menu';
+            mobileMenu.className = 'hidden md:hidden absolute top-full left-0 right-0 bg-white shadow-lg py-4';
+            mobileMenu.innerHTML = `
+                <div class="px-6 py-4 space-y-4">
+                    <a href="index.html" class="block text-soft-black hover:text-muted-gold transition-colors">Home</a>
+                    <a href="talent.html" class="block text-muted-gold font-medium">Talent</a>
+                    <a href="about.html" class="block text-soft-black hover:text-muted-gold transition-colors">About</a>
+                    <a href="contact.html" class="block text-soft-black hover:text-muted-gold transition-colors">Contact</a>
+                </div>
+            `;
+            return mobileMenu;
+        }
+    </script>
+</body>
+</html>
