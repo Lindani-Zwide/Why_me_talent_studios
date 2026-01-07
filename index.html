@@ -242,6 +242,31 @@
             margin-top: 0.2rem;
             font-size: 0.2em;
         }
+
+            /* Hide default Splide pagination dots */
+        .splide__pagination {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        /* Show pagination on hover */
+        .group:hover .splide__pagination {
+            opacity: 1;
+        }
+        
+        /* Change dots to small cubes */
+        .splide__pagination__page {
+            border-radius: 0 !important;
+            width: 8px !important;
+            height: 8px !important;
+            transform: rotate(0deg) !important;
+        }
+        
+        /* Optional: Style active cube */
+        .splide__pagination__page.is-active {
+            background-color: #fff !important;
+            transform: rotate(0deg) scale(1.2) !important;
+        }
     </style>
     <link rel="icon" type="image/png" href="Assets/new_logo_one.png">
     <!-- <img src="/Assets/new_logo.png" alt="logo image" height="50" width="50"> -->
@@ -288,49 +313,46 @@
                     <div class="relative">
                         
                         <div class="aspect-[3/4] rounded-lg overflow-hidden shadow-2xl">
-                            <div id="hero-slider" class="splide h-full">
+                            <div id="hero-slider" class="splide h-full group">
                                 <div class="splide__track h-full">
-                                    <ul class="splide__list h-full">
+                                    <ul id="image-frame" class="splide__list h-full">
                                         <li class="splide__slide">
-                                            <img src="Assets/main_img.jpeg" class="w-full h-full object-cover" alt="Talent 1">
+                                            <img src="/Assets/main_img.jpeg" class="w-full h-full object-cover" alt="Talent 1">
                                         </li>
                                         <li class="splide__slide">
-                                            <img src="Assets/main_img_2.jpeg" class="w-full h-full object-cover" alt="Talent 2">
-                                        </li>
-                                    
-                                        <li class="splide__slide">
-                                            <img src="Assets/main_img_4.jpeg" class="w-full h-full object-cover" alt="Talent 1">
+                                            <img src="/Assets/main_img_2.jpeg" class="w-full h-full object-cover" alt="Talent 2">
                                         </li>
                                         <li class="splide__slide">
-                                            <img src="Assets/WhatsApp Image 2026-01-05 at 18.58.35.jpeg" class="w-full h-full object-cover" alt="Talent 3">
+                                            <img src="/Assets/main_img_4.jpeg" class="w-full h-full object-cover" alt="Talent 1">
                                         </li>
                                         <li class="splide__slide">
-                                            <img src="Assets/main_img_6.jpeg" class="w-full h-full object-cover" alt="Talent 3">
+                                            <img src="/Assets/WhatsApp Image 2026-01-05 at 18.58.35.jpeg" class="w-full h-full object-cover" alt="Talent 3">
                                         </li>
                                         <li class="splide__slide">
-                                            <img src="Assets/WhatsApp Image 2026-01-05 at 19.27.53.jpeg" class="w-full h-full object-cover" alt="Talent 3">
+                                            <img src="/Assets/main_img_6.jpeg" class="w-full h-full object-cover" alt="Talent 3">
+                                        </li>
+                                        <li class="splide__slide">
+                                            <img src="/Assets/WhatsApp Image 2026-01-05 at 19.27.53.jpeg" class="w-full h-full object-cover" alt="Talent 3">
                                         </li>
                                         <li class="splide__slide">
                                             <img src="/Assets/main_img_7.jpeg" class="w-full h-full object-cover" alt="Talent 1">
                                         </li>
                                         <li class="splide__slide">
-                                            <img src="Assets/WhatsApp Image 2026-01-05 at 19.28.07.jpeg" class="w-full h-full object-cover" alt="Talent 3">
+                                            <img src="/Assets/WhatsApp Image 2026-01-05 at 19.28.07.jpeg" class="w-full h-full object-cover" alt="Talent 3">
                                         </li>
                                         <li class="splide__slide">
-                                            <img src="Assets/main_img_9.jpeg" class="w-full h-full object-cover" alt="Talent 3">
+                                            <img src="/Assets/main_img_9.jpeg" class="w-full h-full object-cover" alt="Talent 3">
                                         </li>
                                         <li class="splide__slide">
-                                            <img src="Assets/WhatsApp Image 2026-01-05 at 19.28.29.jpeg" class="w-full h-full object-cover" alt="Talent 3">
+                                            <img src="/Assets/WhatsApp Image 2026-01-05 at 19.28.29.jpeg" class="w-full h-full object-cover" alt="Talent 3">
                                         </li>
                                         <li class="splide__slide">
-                                            <img src="Assets/WhatsApp Image 2026-01-05 at 19.31.16.jpeg" class="w-full h-full object-cover" alt="Talent 3">
+                                            <img src="/Assets/WhatsApp Image 2026-01-05 at 19.31.16.jpeg" class="w-full h-full object-cover" alt="Talent 3">
                                         </li>
-                                        
                                     </ul>
                                 </div>
                             </div>
                         </div>
-
 
                     </div>
                      <div class="text-white">
