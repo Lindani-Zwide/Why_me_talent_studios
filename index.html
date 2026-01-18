@@ -48,7 +48,7 @@
             right: 0;
             bottom: 0;
             background: url('resources/hero-bg.jpg') center/cover;
-            opacity: 0.3;
+            opacity: 0.5;
             z-index: 1;
         }
         
@@ -267,8 +267,59 @@
             background-color: #fff !important;
             transform: rotate(0deg) scale(1.2) !important;
         }
+                /* ---- Mobile menu slide drawer ---- */
+        #mobile-menu {
+          position: fixed;
+          inset: 0 0 0 auto;          /* top:0 right:0 bottom:0 left:auto */
+          width: 50vw;                /* 75 % of viewport width */
+          max-width: 280px;
+          height: 42vh;
+          background: #797979;
+          box-shadow: -4px 0 12px rgba(0,0,0,.15);
+          transform: translateX(100%);/* start off-screen */
+          transition: transform .3s ease;
+          z-index: 50;
+          border-bottom-left-radius: 2rem;
+        }
+        #mobile-menu.open {
+          transform: translateX(0);   /* slide in */
+        }
+        
+        /* ---- Simple overlay ---- */
+        #mobile-menu-overlay {
+          position: fixed;
+          inset: 0;
+          background: rgba(0,0,0,.7);
+          opacity: 0;
+          visibility: hidden;
+          transition: opacity .3s ease, visibility .3s ease;
+          z-index: 40;
+        }
+        #mobile-menu-overlay.open {
+          opacity: 1;
+          visibility: visible;
+        }
+        
+        /* ---- Basic list styling ---- */
+        #mobile-menu ul {
+          list-style: none;
+          margin: 0;
+          padding: 3rem 1.5rem 1.5rem;
+        }
+        #mobile-menu li + li {
+          margin-top: 1.25rem;
+        }
+        #mobile-menu a {
+          text-decoration: none;
+          color: #111;
+          font-size: 1.1rem;
+        }
+        #mobile-menu ul li a{
+            color: rgba(0, 0, 0,0.8);
+            font-size: 1.3rem;
+        }
     </style>
-    <link rel="icon" type="image/png" href="Assets/new_logo_one.png">
+    <link rel="icon" type="image/png" href="/Assets/new_logo_one.png">
     <!-- <img src="/Assets/new_logo.png" alt="logo image" height="50" width="50"> -->
     <script src="https://kit.fontawesome.com/5f2ca4f81a.js" crossorigin="anonymous"></script>
 </head>
@@ -279,7 +330,7 @@
             <div class="flex justify-between items-center">
                 <div class="flex justify-center" class="font-display text-2xl font-semibold text-soft-black">
                     <a href="index.html"> 
-                        <img src="Assets/new_logo.png" alt="logo image" height="50" width="50">
+                        <img src="/Assets/new_logo.png" alt="logo image" height="50" width="50">
                     </a>
                     <p id="logo_text">
                       <span id="wm_text">  WHY ME</span>
@@ -292,7 +343,10 @@
                     <a href="contact.html" class="nav-link text-sm font-medium text-soft-black hover:text-muted-gold">Contact</a>
                 </div>
                 <div class="md:hidden">
-                    <button id="mobile-menu-btn" class="text-soft-black">
+                    <button id="mobile-menu-btn"
+                        class="text-soft-black"
+                        aria-controls="mobile-menu"
+                        aria-expanded="false">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <circle cx="12" cy="4" r="2" fill="currentColor"/>
                             <circle cx="12" cy="12" r="2" fill="currentColor"/>
@@ -317,37 +371,37 @@
                                 <div class="splide__track h-full">
                                     <ul id="image-frame" class="splide__list h-full">
                                         <li class="splide__slide">
-                                            <img src="Assets/main_img.jpeg" class="w-full h-full object-cover" alt="Talent 1">
+                                            <img src="/Assets/main_img.jpeg" class="w-full h-full object-cover" alt="Talent 1">
                                         </li>
                                         <li class="splide__slide">
-                                            <img src="Assets/main_img_2.jpeg" class="w-full h-full object-cover" alt="Talent 2">
+                                            <img src="/Assets/main_img_2.jpeg" class="w-full h-full object-cover" alt="Talent 2">
                                         </li>
                                         <li class="splide__slide">
-                                            <img src="Assets/main_img_4.jpeg" class="w-full h-full object-cover" alt="Talent 1">
+                                            <img src="/Assets/main_img_4.jpeg" class="w-full h-full object-cover" alt="Talent 1">
                                         </li>
                                         <li class="splide__slide">
-                                            <img src="Assets/WhatsApp Image 2026-01-05 at 18.58.35.jpeg" class="w-full h-full object-cover" alt="Talent 3">
+                                            <img src="/Assets/WhatsApp Image 2026-01-05 at 18.58.35.jpeg" class="w-full h-full object-cover" alt="Talent 3">
                                         </li>
                                         <li class="splide__slide">
-                                            <img src="Assets/main_img_6.jpeg" class="w-full h-full object-cover" alt="Talent 3">
+                                            <img src="/Assets/main_img_6.jpeg" class="w-full h-full object-cover" alt="Talent 3">
                                         </li>
                                         <li class="splide__slide">
-                                            <img src="Assets/WhatsApp Image 2026-01-05 at 19.27.53.jpeg" class="w-full h-full object-cover" alt="Talent 3">
+                                            <img src="/Assets/WhatsApp Image 2026-01-05 at 19.27.53.jpeg" class="w-full h-full object-cover" alt="Talent 3">
                                         </li>
                                         <li class="splide__slide">
-                                            <img src="Assets/main_img_7.jpeg" class="w-full h-full object-cover" alt="Talent 1">
+                                            <img src="/Assets/main_img_7.jpeg" class="w-full h-full object-cover" alt="Talent 1">
                                         </li>
                                         <li class="splide__slide">
-                                            <img src="Assets/WhatsApp Image 2026-01-05 at 19.28.07.jpeg" class="w-full h-full object-cover" alt="Talent 3">
+                                            <img src="/Assets/WhatsApp Image 2026-01-05 at 19.28.07.jpeg" class="w-full h-full object-cover" alt="Talent 3">
                                         </li>
                                         <li class="splide__slide">
-                                            <img src="Assets/main_img_9.jpeg" class="w-full h-full object-cover" alt="Talent 3">
+                                            <img src="/Assets/main_img_9.jpeg" class="w-full h-full object-cover" alt="Talent 3">
                                         </li>
                                         <li class="splide__slide">
-                                            <img src="Assets/WhatsApp Image 2026-01-05 at 19.28.29.jpeg" class="w-full h-full object-cover" alt="Talent 3">
+                                            <img src="/Assets/WhatsApp Image 2026-01-05 at 19.28.29.jpeg" class="w-full h-full object-cover" alt="Talent 3">
                                         </li>
                                         <li class="splide__slide">
-                                            <img src="Assets/WhatsApp Image 2026-01-05 at 19.31.16.jpeg" class="w-full h-full object-cover" alt="Talent 3">
+                                            <img src="/Assets/WhatsApp Image 2026-01-05 at 19.31.16.jpeg" class="w-full h-full object-cover" alt="Talent 3">
                                         </li>
                                     </ul>
                                 </div>
@@ -376,7 +430,7 @@
             <div class="text-center">
                 <div class="flex justify-center" class="font-display text-2xl font-semibold text-soft-black">
                     <a href="index.html"> 
-                        <img src="Assets/new_logo.png" alt="logo image" height="50" width="50">
+                        <img src="/Assets/new_logo.png" alt="logo image" height="50" width="50">
                     </a>
                 </div>
                 <div class="font-display text-3xl font-semibold mb-4">
@@ -414,6 +468,59 @@
             </div>
         </div>
     </footer>
+    <script>
+               (function(){
+         let btn   = document.getElementById('mobile-menu-btn');
+         let menu  = null;           // created lazily
+         let overlay = null;
+       
+         btn.addEventListener('click', toggleMenu);
+       
+         function toggleMenu(){
+           if (!menu) createMenu();  // first click builds the menu
+           let open = menu.classList.toggle('open');
+           overlay.classList.toggle('open', open);
+           btn.setAttribute('aria-expanded', open);
+         }
+       
+         function createMenu(){
+           /* ---- MENU MARKUP ---- */
+           menu = document.createElement('nav');
+           menu.id = 'mobile-menu';
+           menu.innerHTML =
+             '<ul>' +
+               '<li><a href="about.html">About</a></li>' +
+               '<li><a href="talent.html">Talent</a></li>' +
+               '<li><a href="contact.html">Contact</a></li>' +
+             '</ul>';
+           menu.style.color='white';
+           overlay = document.createElement('div');
+           overlay.id = 'mobile-menu-overlay';
+       
+
+           /*here*/
+
+           
+           /*HERE*/
+
+           /* ---- inject ---- */
+           document.body.appendChild(menu);
+           document.body.appendChild(overlay);
+       
+           /* ---- close helpers ---- */
+           overlay.addEventListener('click', closeMenu);
+           menu.addEventListener('click', function(e){
+             if (e.target.tagName === 'A') closeMenu();
+           });
+         }
+       
+         function closeMenu(){
+           menu.classList.remove('open');
+           overlay.classList.remove('open');
+           btn.setAttribute('aria-expanded', 'false');
+         }
+       })();
+    </script>
     <script defer type="module" src="main.js"></script>
 </body>
 </html>
