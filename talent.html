@@ -151,13 +151,15 @@
                 grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
                 gap: 1rem;
             }
-        }#mobile-menu {
+        }
+        #mobile-menu {
           position: fixed;
           inset: 0 0 0 auto;          /* top:0 right:0 bottom:0 left:auto */
-          width: 50vw;                /* 75 % of viewport width */
-          max-width: 280px;
-          height: 42vh;
-          background: #797979;
+          width: 120px;                /* 75 % of viewport width */
+          max-width: 120px;
+          height: 200px;
+          backdrop-filter: blur(2.5px) ;
+          background:rgba(230,230,230,0.25);
           box-shadow: -4px 0 12px rgba(0,0,0,.15);
           transform: translateX(100%);/* start off-screen */
           transition: transform .3s ease;
@@ -224,6 +226,12 @@
        #logo_text{
             margin-top: 0.2rem;
             font-size: 0.2em;
+        }
+        #mobile-menu ul li a{
+            color: black;
+            font-size: 1.3rem;
+            font-weight: 900;
+            font-size: 0.8rem;
         }
     </style>
     <link rel="icon" type="image/png" href="Assets/new_logo_one.png">
@@ -580,9 +588,9 @@
                    <span id="wm_text">  WHY ME </span><span id="ts_text" class="gradient-text">Talent Studios</span>
                 </div>
                 <p class="text-white-400 mb-8">
-                    <a href="">
+                    
                        GET IN TOUCH:
-                    </a>
+                    
                 </p>
                 <div class="flex justify-center space-x-8 mb-8">
                     <a href="https://www.tiktok.com/@why.me.talent.stu?_r=1&_t=ZS-93ESlywN6md" target="_blank">
