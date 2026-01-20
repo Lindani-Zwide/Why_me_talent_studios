@@ -9,7 +9,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    
+        <script src="https://kit.fontawesome.com/5f2ca4f81a.js" crossorigin="anonymous"></script>
+
     <style>
         :root {
             --soft-black: #1a1a1a;
@@ -18,7 +19,9 @@
             --muted-gold: #c9a961;
             --warm-gray: #6b6b6b;
         }
-        
+         #footer{
+            background-color: #b8954a;
+        }
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--ivory);
@@ -30,8 +33,8 @@
         }
         
         .nav-blur {
-            backdrop-filter: blur(10px);
-            background: rgba(248, 248, 246, 0.9);
+            background: rgba(0, 0, 0, 0.5);
+            background-color: #b8954a;
         }
         
         .gradient-text {
@@ -181,29 +184,112 @@
         .file-upload.dragover {
             border-color: var(--muted-gold);
             background: rgba(201, 169, 97, 0.05);
+        }#mobile-menu {
+          position: fixed;
+          inset: 0 0 0 auto;          /* top:0 right:0 bottom:0 left:auto */
+          width: 50vw;                /* 75 % of viewport width */
+          max-width: 280px;
+          height: 42vh;
+          background: #797979;
+          box-shadow: -4px 0 12px rgba(0,0,0,.15);
+          transform: translateX(100%);/* start off-screen */
+          transition: transform .3s ease;
+          z-index: 50;
+          border-bottom-left-radius: 2rem;
+        }
+        #mobile-menu.open {
+          transform: translateX(0);   /* slide in */
+        }
+        
+        /* ---- Simple overlay ---- */
+        #mobile-menu-overlay {
+          position: fixed;
+          inset: 0;
+          background: rgba(0,0,0,.7);
+          opacity: 0;
+          visibility: hidden;
+          transition: opacity .3s ease, visibility .3s ease;
+          z-index: 40;
+        }
+        #mobile-menu-overlay.open {
+          opacity: 1;
+          visibility: visible;
+        }
+        
+        /* ---- Basic list styling ---- */
+        #mobile-menu ul {
+          list-style: none;
+          margin: 0;
+          padding: 3rem 1.5rem 1.5rem;
+        }
+        #mobile-menu li + li {
+          margin-top: 1.25rem;
+        }
+        #mobile-menu a {
+          text-decoration: none;
+          color: #111;
+          font-size: 1.1rem;
+        }
+        #mobile-menu ul li a{
+            color: rgba(0, 0, 0,0.8);
+            font-size: 1.3rem;
+        }#ts_text{
+            font-family:newFont;
+            margin-left: 0.2rem;
+            font-size:1.05rem;
+            font-weight: 900;
+        }
+        @font-face {
+            font-family: newFont;
+            src: url(Assets/FontS/MontserratAlternates-Thin.ttf);
+        }
+        @font-face {
+            font-family: newFont01;
+            src: url(Assets/Fonts/MontserratAlternates-ExtraBold.ttf);
+        }
+        #wm_text{
+            font-family: newFont01;
+            font-weight: 900;
+            font-size: 1.30rem;
+            margin-left:0.9rem;
+        }
+       #logo_text{
+            margin-top: 0.2rem;
+            font-size: 0.2em;
         }
     </style>
     <link rel="icon" type="image/png" href="Assets/new_logo_one.png">
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 nav-blur">
+    <nav id="nav-bar" class="fixed top-0 left-0 right-0 z-50 nav-blur">
         <div class="max-w-7xl mx-auto px-6 py-4">
             <div class="flex justify-between items-center">
-                <div class="font-display text-2xl font-semibold text-soft-black">
-                     <a href="index.html"> 
+                <div class="flex justify-center" class="font-display text-2xl font-semibold text-soft-black">
+                    <a href="index.html"> 
                         <img src="Assets/new_logo.png" alt="logo image" height="50" width="50">
+                    </a>
+                    <a href="index.html">
+                        <p id="logo_text">
+                          <span id="wm_text">  WHY ME</span>
+                          <span id="ts_text">Talent Studios</span> 
+                        </p>
                     </a>
                 </div>
                 <div class="hidden md:flex space-x-8">
-                    <a href="talent.html" class="nav-link text-sm font-medium text-soft-black hover:text-muted-gold">Talent</a>
+                    <a href="talent.html" class="nav-link text-sm font-medium text-Gold hover:text-muted-gold">Talent</a>
                     <a href="about.html" class="nav-link text-sm font-medium text-soft-black hover:text-muted-gold">About</a>
-                    <a href="contact.html" class="nav-link text-sm font-medium text-muted-gold">Contact</a>
+                    <a href="contact.html" class="nav-link text-sm font-medium text-soft-black hover:text-muted-gold">Contact</a>
                 </div>
                 <div class="md:hidden">
-                    <button id="mobile-menu-btn" class="text-soft-black">
+                    <button id="mobile-menu-btn"
+                        class="text-soft-black"
+                        aria-controls="mobile-menu"
+                        aria-expanded="false">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            <circle cx="12" cy="4" r="2" fill="currentColor"/>
+                            <circle cx="12" cy="12" r="2" fill="currentColor"/>
+                            <circle cx="12" cy="20" r="2" fill="currentColor"/>
                         </svg>
                     </button>
                 </div>
@@ -215,10 +301,10 @@
     <section class="pt-24 pb-12 bg-white">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-12">
-                <h1 class="font-display text-5xl lg:text-6xl font-bold mb-6 text-soft-black">
+                <h1 class="font-display text-2xl lg:text-6xl font-bold mb-6 text-soft-black">
                     Let's <span class="gradient-text">Connect</span>
                 </h1>
-                <p class="text-xl text-warm-gray max-w-3xl mx-auto">
+                <p class="text-small text-warm-gray max-w-3xl mx-auto">
                     Whether you're exceptional talent seeking representation or a client looking for the perfect artist, 
                     we're here to help you achieve your goals.
                 </p>
@@ -601,10 +687,10 @@
     <section class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center mb-16">
-                <h2 class="font-display text-4xl font-bold mb-6 text-soft-black">
+                <h2 class="font-display text-2xl font-bold mb-6 text-soft-black">
                     Get in <span class="gradient-text">Touch</span>
                 </h2>
-                <p class="text-xl text-warm-gray">
+                <p class="text-small text-warm-gray">
                     Prefer to reach out directly? Here are our contact details.
                 </p>
             </div>
@@ -640,7 +726,7 @@
                         </svg>
                     </div>
                     <h3 class="font-display text-xl font-semibold mb-4">Office</h3>
-                    <p class="text-warm-gray">New York City</p>
+                    <p class="text-warm-gray">Johhanesburg CBD</p>
                     <p class="text-warm-gray">By appointment only</p>
                 </div>
             </div>
@@ -648,19 +734,45 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-soft-black text-white py-12">
+    <!-- Footer -->
+    <footer id="footer" class="bg-soft-black text-white py-12">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center">
+                <div class="flex justify-center" class="font-display text-2xl font-semibold text-soft-black">
+                    <a href="index.html"> 
+                        <img src="Assets/new_logo.png" alt="logo image" height="50" width="50">
+                    </a>
+                </div>
                 <div class="font-display text-3xl font-semibold mb-4">
-                    Why Me <span class="gradient-text">Talent</span>
+                   <span id="wm_text">  WHY ME </span><span id="ts_text" class="gradient-text">Talent Studios</span>
                 </div>
-                <p class="text-gray-400 mb-8">Premium talent representation for the modern creative industry</p>
+                <p class="text-white-400 mb-8">
+                    <a href="">
+                       GET IN TOUCH:
+                    </a>
+                </p>
                 <div class="flex justify-center space-x-8 mb-8">
-                    <a href="#" class="text-gray-400 hover:text-muted-gold transition-colors">Instagram</a>
-                    <a href="#" class="text-gray-400 hover:text-muted-gold transition-colors">LinkedIn</a>
-                    <a href="#" class="text-gray-400 hover:text-muted-gold transition-colors">Twitter</a>
+                    <a href="" target="_blank">
+                      <i class="fa-brands fa-tiktok"></i> <!--Whatsapp icon-->
+                    </a>
+                    <a href="" target="_blank">
+                      <img src="Assets/email.png" alt="email-icon" height="19" width="19">
+                    </a>
+                    <a href="" target="_blank">
+                      <i class="fa-brands fa-whatsapp"></i> <!--Whatsapp icon-->
+                    </a>
+                    <a href="" target="_blank">
+                      <i class="fa-brands fa-facebook"></i> <!--Github icon-->
+                    </a>
+                    <a href="" target="_blank">
+                      <i class="fa-brands fa-pinterest"></i> <!--Whatsapp icon-->
+                    </a>
+                    <a href="" target="_blank">
+                      <i class="fa-brands fa-instagram"></i> <!--Github icon-->
+                    </a>
                 </div>
-                <div class="text-sm text-gray-500">
+                
+                <div class="text-sm text-black-500">
                     © 2026 Why Me Talent Studios. All rights reserved.
                 </div>
             </div>
@@ -859,38 +971,57 @@
             document.body.appendChild(modal);
         }
 
-        // Mobile menu functionality
-        function initMobileMenu() {
-            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-            const nav = document.querySelector('nav');
-            
-            if (mobileMenuBtn) {
-                mobileMenuBtn.addEventListener('click', () => {
-                    let mobileMenu = document.getElementById('mobile-menu');
-                    if (!mobileMenu) {
-                        mobileMenu = createMobileMenu();
-                        nav.appendChild(mobileMenu);
-                    }
-                    
-                    mobileMenu.classList.toggle('hidden');
-                });
-            }
-        }
+        (function(){
+         let btn   = document.getElementById('mobile-menu-btn');
+         let menu  = null;           // created lazily
+         let overlay = null;
+       
+         btn.addEventListener('click', toggleMenu);
+       
+         function toggleMenu(){
+           if (!menu) createMenu();  // first click builds the menu
+           let open = menu.classList.toggle('open');
+           overlay.classList.toggle('open', open);
+           btn.setAttribute('aria-expanded', open);
+         }
+       
+         function createMenu(){
+           /* ---- MENU MARKUP ---- */
+           menu = document.createElement('nav');
+           menu.id = 'mobile-menu';
+           menu.innerHTML =
+             '<ul>' +
+               '<li><a href="about.html">About</a></li>' +
+               '<li><a href="talent.html">Talent</a></li>' +
+               '<li><a href="contact.html">Contact</a></li>' +
+             '</ul>';
+           menu.style.color='white';
+           overlay = document.createElement('div');
+           overlay.id = 'mobile-menu-overlay';
+       
 
-        function createMobileMenu() {
-            const mobileMenu = document.createElement('div');
-            mobileMenu.id = 'mobile-menu';
-            mobileMenu.className = 'hidden md:hidden absolute top-full left-0 right-0 bg-white shadow-lg py-4';
-            mobileMenu.innerHTML = `
-                <div class="px-6 py-4 space-y-4">
-                    <a href="index.html" class="block text-soft-black hover:text-muted-gold transition-colors">Home</a>
-                    <a href="talent.html" class="block text-soft-black hover:text-muted-gold transition-colors">Talent</a>
-                    <a href="about.html" class="block text-soft-black hover:text-muted-gold transition-colors">About</a>
-                    <a href="contact.html" class="block text-muted-gold font-medium">Contact</a>
-                </div>
-            `;
-            return mobileMenu;
-        }
+           /*here*/
+
+           
+           /*HERE*/
+
+           /* ---- inject ---- */
+           document.body.appendChild(menu);
+           document.body.appendChild(overlay);
+       
+           /* ---- close helpers ---- */
+           overlay.addEventListener('click', closeMenu);
+           menu.addEventListener('click', function(e){
+             if (e.target.tagName === 'A') closeMenu();
+           });
+         }
+       
+         function closeMenu(){
+           menu.classList.remove('open');
+           overlay.classList.remove('open');
+           btn.setAttribute('aria-expanded', 'false');
+         }
+       })();
     </script>
 </body>
 </html>
