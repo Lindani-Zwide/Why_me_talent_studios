@@ -159,12 +159,14 @@
           max-width: 120px;
           height: 200px;
           backdrop-filter: blur(2.5px) ;
-          background:rgba(230,230,230,0.25);
+          background:rgba(245, 245, 245, 0.45);
           box-shadow: -4px 0 12px rgba(0,0,0,.15);
           transform: translateX(100%);/* start off-screen */
           transition: transform .3s ease;
           z-index: 50;
           border-bottom-left-radius: 2rem;
+          border-left: 3px solid  #b8954a;
+          border-bottom: 3px solid  #b8954a;
         }
         #mobile-menu.open {
           transform: translateX(0);   /* slide in */
@@ -174,7 +176,7 @@
         #mobile-menu-overlay {
           position: fixed;
           inset: 0;
-          background: rgba(0,0,0,.7);
+          background: rgba(10,10,10,.8);
           opacity: 0;
           visibility: hidden;
           transition: opacity .3s ease, visibility .3s ease;
