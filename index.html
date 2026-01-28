@@ -312,19 +312,26 @@
         #mobile-menu li + li {
           margin-top: 1.25rem;
         }
-        #mobile-menu a {
+        /* #mobile-menu a {
           text-decoration: none;
-          color: #111;
+          color: white;
           font-size: 1.1rem;
-        }
+        } */
         #mobile-menu ul li a{
-            color: black;
+            color:#000;
             font-size: 1.3rem;
             font-weight: 900;
             font-size: 0.8rem;
         }
+        #mobile-menu ul li a:hover {
+            color: #e0ae42;
+            background-color: #000;
+            border-radius: 5px;
+            border: 1px solid #e0ae42;
+            padding: 3px;
+        }
     </style>
-    <link rel="icon" type="image/png" href="/Assets/new_logo_one.png">
+    <link rel="icon" type="image/png" href="Assets/new_logo_one.png">
     <!-- <img src="/Assets/new_logo.png" alt="logo image" height="50" width="50"> -->
     <script src="https://kit.fontawesome.com/5f2ca4f81a.js" crossorigin="anonymous"></script>
 </head>
@@ -496,8 +503,8 @@
            menu.id = 'mobile-menu';
            menu.innerHTML =
              '<ul>' +
+               '<li><a href="talent.html">Talent</a>' +
                '<li><a href="about.html">About</a></li>' +
-               '<li><a href="talent.html">Talent</a></li>' +
                '<li><a href="contact.html">Contact</a></li>' +
              '</ul>';
            menu.style.color='white';
